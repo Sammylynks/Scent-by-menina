@@ -1,5 +1,6 @@
-/* Correct client media restored from a compact production sprite. */
-.asset-image{background-image:url("sprite-fixed.svg")!important;background-repeat:no-repeat!important;background-size:300% 300%!important;background-color:#eee}
+/* Client media positions. The real production media is injected by v2.js after
+   the high-resolution asset bundle is restored from same-origin chunks. */
+.asset-image{background-image:none!important;background-repeat:no-repeat!important;background-size:300% 300%!important;background-color:#eee}
 .asset-product-arabian{background-position:0 50%!important}
 .asset-product-designer{background-position:100% 0!important}
 .asset-product-feature{background-position:0 50%!important}
