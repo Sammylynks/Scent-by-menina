@@ -1,0 +1,19 @@
+/* Correct client media restored from a compact production sprite. */
+.asset-image{background-image:url("sprite-fixed.svg")!important;background-repeat:no-repeat!important;background-size:300% 300%!important;background-color:#eee}
+.asset-product-arabian{background-position:0 50%!important}
+.asset-product-designer{background-position:100% 0!important}
+.asset-product-feature{background-position:0 50%!important}
+.asset-product-mists{background-position:50% 50%!important}
+.asset-product-sprays{background-position:100% 50%!important}
+.asset-founder{background-position:50% 0!important}
+.asset-review-returning{background-position:0 100%!important;background-size:300% 300%!important}
+.asset-review-pineapple{background-position:50% 100%!important;background-size:300% 300%!important}
+.asset-instagram-profile{background-position:100% 100%!important}
+.asset-instagram-grid-1{background-position:0 0!important}
+.asset-instagram-grid-2{background-position:0 50%!important}
+.brand-wordmark,.footer-wordmark{display:flex;align-items:baseline;gap:.42rem;white-space:nowrap;color:#181219}
+.brand-wordmark span,.footer-wordmark span{font-family:var(--serif);font-style:italic;font-size:1.48rem;letter-spacing:-.04em}
+.brand-wordmark strong,.footer-wordmark strong{font-family:var(--sans);font-size:.76rem;letter-spacing:.28em}
+.footer-wordmark{color:#fff;display:inline-flex;margin-bottom:12px}
+.footer-wordmark span{font-size:2.1rem}.footer-wordmark strong{font-size:.82rem}
+@media(max-width:720px){.brand{width:auto!important;padding:0 10px!important;background:rgba(255,255,255,.55)!important}.brand-wordmark span{font-size:1.34rem}.brand-wordmark strong{font-size:.68rem;letter-spacing:.22em}.footer-wordmark span{font-size:1.9rem}}
