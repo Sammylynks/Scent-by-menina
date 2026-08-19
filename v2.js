@@ -31,26 +31,41 @@
   };
   loadBrandMedia();
 
-  // The former Bumpa storefront is inactive. Route every old storefront link
-  // to the brand's official Instagram profile instead so visitors never hit a dead page.
   const officialInstagram = 'https://www.instagram.com/scentby_menina/';
+
+  // The former Bumpa storefront is inactive. Route every old storefront link
+  // to the official Instagram profile so visitors never hit a dead destination.
   document.querySelectorAll('a[href]').forEach((link) => {
     const href = link.getAttribute('href') || '';
     const isOldStore = href.includes('scentbymenina1.bumpa.shop') ||
       (href.includes('l.instagram.com') && href.includes('scentbymenina1.bumpa.shop'));
-    if (!isOldStore) return;
 
-    link.href = officialInstagram;
-    link.target = '_blank';
-    link.rel = 'noopener';
+    if (isOldStore) {
+      link.href = officialInstagram;
+      link.target = '_blank';
 
-    const label = link.textContent.trim().toLowerCase();
-    if (label.includes('shop the collection')) link.textContent = 'View Collection on Instagram ↗';
-    else if (label.includes('browse current stock')) link.textContent = 'See Current Stock on Instagram ↗';
-    else if (label.includes('shop retail')) link.textContent = 'Shop via Instagram ↗';
-    else if (label.includes('browse collection')) link.textContent = 'Browse on Instagram ↗';
-    else if (label.includes('bumpa online store')) link.textContent = 'Official Instagram ↗';
-    else if (label.includes('view collection')) link.textContent = 'View on Instagram ↗';
+      const label = link.textContent.trim().toLowerCase();
+      if (label.includes('shop the collection')) link.textContent = 'View Collection on Instagram ↗';
+      else if (label.includes('browse current stock')) link.textContent = 'See Current Stock on Instagram ↗';
+      else if (label.includes('shop retail')) link.textContent = 'Shop via Instagram ↗';
+      else if (label.includes('browse collection')) link.textContent = 'Browse on Instagram ↗';
+      else if (label.includes('bumpa online store')) link.textContent = 'Official Instagram ↗';
+      else if (label.includes('view collection')) link.textContent = 'View on Instagram ↗';
+    }
+
+    if (link.target === '_blank') {
+      link.rel = 'noopener noreferrer';
+    }
+  });
+
+  // Remove stale storefront wording from visible copy as part of final QA.
+  document.querySelectorAll('p').forEach((paragraph) => {
+    const text = paragraph.textContent.trim();
+    if (text === 'Real product imagery from Scent by Menina. For current stock and prices, enquire directly or browse the online catalogue.') {
+      paragraph.textContent = 'Real product imagery from Scent by Menina. For current stock and prices, enquire directly or view the latest collection on Instagram.';
+    } else if (text === 'Browse categories or the online catalogue.') {
+      paragraph.textContent = 'Browse categories or see the latest collection on Instagram.';
+    }
   });
 
   // Keep structured business metadata consistent with the live links.
@@ -58,14 +73,37 @@
   if (schema) {
     try {
       const data = JSON.parse(schema.textContent);
+      data.url = window.location.origin;
       if (Array.isArray(data.sameAs)) {
-        data.sameAs = [...new Set(data.sameAs.filter(url => !String(url).includes('scentbymenina1.bumpa.shop')).concat(officialInstagram))];
-        schema.textContent = JSON.stringify(data);
+        data.sameAs = [...new Set(
+          data.sameAs
+            .filter(url => !String(url).includes('scentbymenina1.bumpa.shop'))
+            .concat(officialInstagram)
+        )];
       }
+      schema.textContent = JSON.stringify(data);
     } catch (_) {
-      // Leave the page running normally if third-party metadata is ever malformed.
+      // Leave the page running normally if metadata is ever malformed.
     }
   }
+
+  // Make fragrance-education cards genuine keyboard/touch interactions.
+  document.querySelectorAll('.education-card').forEach((card) => {
+    const title = card.querySelector('h3')?.textContent?.trim() || 'Fragrance tips';
+    card.setAttribute('role', 'link');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `${title} — open Scent by Menina on Instagram`);
+    card.style.cursor = 'pointer';
+
+    const openInstagram = () => window.open(officialInstagram, '_blank', 'noopener,noreferrer');
+    card.addEventListener('click', openInstagram);
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openInstagram();
+      }
+    });
+  });
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
