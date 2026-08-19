@@ -1,6 +1,36 @@
 (() => {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Restore the high-resolution client media used throughout the page. The media
+  // is stored in small same-origin text chunks so it can be reconstructed reliably
+  // in production without depending on the broken legacy SVG sprite.
+  const loadBrandMedia = async () => {
+    try {
+      const parts = await Promise.all(
+        Array.from({ length: 8 }, (_, index) => {
+          const part = String(index + 1).padStart(2, '0');
+          return fetch(`/media/sprite.part${part}`, { cache: 'force-cache' }).then((response) => {
+            if (!response.ok) throw new Error(`Media part ${part} failed with ${response.status}`);
+            return response.text();
+          });
+        })
+      );
+
+      const base64 = parts.join('').replace(/\s+/g, '');
+      const spriteUrl = `url("data:image/webp;base64,${base64}")`;
+      document.querySelectorAll('.asset-image').forEach((element) => {
+        element.style.setProperty('background-image', spriteUrl, 'important');
+        element.style.setProperty('background-repeat', 'no-repeat', 'important');
+        element.style.setProperty('background-size', '300% 300%', 'important');
+      });
+      document.documentElement.classList.add('media-ready');
+    } catch (error) {
+      console.error('Unable to load Scent by Menina media:', error);
+      document.documentElement.classList.add('media-error');
+    }
+  };
+  loadBrandMedia();
+
   // The former Bumpa storefront is inactive. Route every old storefront link
   // to the brand's official Instagram profile instead so visitors never hit a dead page.
   const officialInstagram = 'https://www.instagram.com/scentby_menina/';
