@@ -1,6 +1,42 @@
 (() => {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // The former Bumpa storefront is inactive. Route every old storefront link
+  // to the brand's official Instagram profile instead so visitors never hit a dead page.
+  const officialInstagram = 'https://www.instagram.com/scentby_menina/';
+  document.querySelectorAll('a[href]').forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    const isOldStore = href.includes('scentbymenina1.bumpa.shop') ||
+      (href.includes('l.instagram.com') && href.includes('scentbymenina1.bumpa.shop'));
+    if (!isOldStore) return;
+
+    link.href = officialInstagram;
+    link.target = '_blank';
+    link.rel = 'noopener';
+
+    const label = link.textContent.trim().toLowerCase();
+    if (label.includes('shop the collection')) link.textContent = 'View Collection on Instagram ↗';
+    else if (label.includes('browse current stock')) link.textContent = 'See Current Stock on Instagram ↗';
+    else if (label.includes('shop retail')) link.textContent = 'Shop via Instagram ↗';
+    else if (label.includes('browse collection')) link.textContent = 'Browse on Instagram ↗';
+    else if (label.includes('bumpa online store')) link.textContent = 'Official Instagram ↗';
+    else if (label.includes('view collection')) link.textContent = 'View on Instagram ↗';
+  });
+
+  // Keep structured business metadata consistent with the live links.
+  const schema = document.querySelector('script[type="application/ld+json"]');
+  if (schema) {
+    try {
+      const data = JSON.parse(schema.textContent);
+      if (Array.isArray(data.sameAs)) {
+        data.sameAs = [...new Set(data.sameAs.filter(url => !String(url).includes('scentbymenina1.bumpa.shop')).concat(officialInstagram))];
+        schema.textContent = JSON.stringify(data);
+      }
+    } catch (_) {
+      // Leave the page running normally if third-party metadata is ever malformed.
+    }
+  }
+
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
 
