@@ -1,0 +1,1 @@
+Real client-supplied product, founder, review and social media imagery used by the production landing page.
