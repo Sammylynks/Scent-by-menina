@@ -1,4 +1,5 @@
 /* Production mobile QA hotfix */
+.sprite{background-image:url("sprite-fixed.svg")!important;background-repeat:no-repeat!important;background-size:300% 300%!important}
 @media(max-width:680px){
   .section{padding:64px 0!important}
   .site-header{top:8px!important;transition:transform .25s ease!important}
