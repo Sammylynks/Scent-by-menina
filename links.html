@@ -12,19 +12,19 @@
     *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;min-height:100vh;background:radial-gradient(circle at 82% 8%,rgba(191,153,205,.28),transparent 28%),linear-gradient(180deg,#f9f5f7 0%,#fffdfa 48%,#f1e6f0 100%);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif}
     .page{width:min(100%,560px);margin:auto;min-height:100vh;padding:24px 18px 34px;display:flex;flex-direction:column}
     .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid rgba(255,255,255,.8);background:rgba(255,255,255,.62);backdrop-filter:blur(18px);border-radius:24px;box-shadow:0 14px 40px rgba(43,25,49,.08)}
-    .logo{height:42px;width:auto;max-width:170px;object-fit:contain}.mark{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--plum);color:#fff;font-size:15px;font-weight:600}
+    .brand{display:inline-flex;align-items:center;text-decoration:none;color:var(--plum);line-height:1}.brand-name{font-family:'Playfair Display',Georgia,serif;font-size:22px;letter-spacing:.06em;font-weight:600}.brand-by{display:block;margin-top:4px;font-family:'DM Sans',system-ui,sans-serif;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:#8a5d90;font-weight:700}.brand-wrap{display:flex;flex-direction:column}.mark{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--plum);color:#fff;font-size:15px;font-weight:600}
     .intro{text-align:center;padding:42px 10px 22px}.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#76527d;font-weight:700;margin-bottom:15px}.intro h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(34px,9vw,50px);line-height:.98;font-weight:500;margin:0 0 13px}.intro h1 em{color:#70417b}.intro p{max-width:420px;margin:0 auto;color:var(--muted);font-size:14px;line-height:1.7}.handle{margin-top:10px;font-size:13px;color:#5d3d64;font-weight:600}
     .links{display:grid;gap:12px;margin-top:16px}.link{position:relative;display:flex;align-items:center;gap:14px;min-height:66px;padding:12px 17px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.82);color:var(--ink);text-decoration:none;box-shadow:0 9px 28px rgba(44,24,50,.07);transition:transform .2s ease,box-shadow .2s ease,background .2s ease}.link:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(44,24,50,.12)}.link.primary{background:var(--plum);color:#fff;border-color:var(--plum)}.icon{width:40px;height:40px;flex:0 0 40px;border-radius:13px;display:grid;place-items:center;background:#efe5f0;color:#5c3266;font-weight:700;font-size:15px}.primary .icon{background:rgba(255,255,255,.14);color:#fff}.copy{display:flex;flex-direction:column;gap:3px;min-width:0}.copy strong{font-size:15px;font-weight:600}.copy span{font-size:11px;opacity:.68}.arrow{margin-left:auto;font-size:18px;opacity:.65}
     .socials{display:flex;justify-content:center;gap:10px;margin:24px 0 8px}.social{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;text-decoration:none;background:rgba(255,255,255,.75);border:1px solid var(--line);color:var(--plum);font-weight:700;font-size:13px}.social:hover{background:#fff}
     .location{margin-top:24px;padding:20px;border-radius:22px;background:rgba(42,23,49,.95);color:#fff;text-align:center}.location .eyebrow{color:#d7bfdc;margin-bottom:9px}.location p{margin:0;color:rgba(255,255,255,.76);font-size:13px;line-height:1.6}.location strong{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:500;display:block;margin-bottom:5px}
     footer{text-align:center;padding:25px 0 4px;color:#8a818b;font-size:11px}footer a{color:#70417b;text-decoration:none}
-    @media(max-width:390px){.page{padding-left:14px;padding-right:14px}.intro{padding-top:34px}.link{min-height:62px}.logo{max-width:150px}}
+    @media(max-width:390px){.page{padding-left:14px;padding-right:14px}.intro{padding-top:34px}.link{min-height:62px}.brand-name{font-size:20px}}
   </style>
 </head>
 <body>
   <main class="page">
     <header class="topbar">
-      <a href="/" aria-label="Scent by Menina home"><img class="logo" src="/logo.webp" alt="Scent by Menina"></a>
+      <a class="brand" href="/" aria-label="Scent by Menina home"><span class="brand-wrap"><span class="brand-name">Scent</span><span class="brand-by">by Menina</span></span></a>
       <div class="mark" aria-hidden="true">S</div>
     </header>
 
@@ -38,9 +38,6 @@
     <nav class="links" aria-label="Scent by Menina links">
       <a class="link primary" href="https://scent-by-menina.vercel.app/">
         <span class="icon">✦</span><span class="copy"><strong>Visit Our Website</strong><span>Explore the full Scent by Menina experience</span></span><span class="arrow">↗</span>
-      </a>
-      <a class="link" href="https://scentbymenina1.bumpa.shop/?utm_source=links&utm_medium=social&utm_content=links_page">
-        <span class="icon">🛍</span><span class="copy"><strong>Shop the Collection</strong><span>Browse available fragrances and products</span></span><span class="arrow">↗</span>
       </a>
       <a class="link" href="https://wa.me/2349055703352?text=Hello%20Scent%20by%20Menina%2C%20I%27d%20like%20to%20make%20an%20enquiry.">
         <span class="icon">WA</span><span class="copy"><strong>Order on WhatsApp</strong><span>Chat directly with Scent by Menina</span></span><span class="arrow">↗</span>
