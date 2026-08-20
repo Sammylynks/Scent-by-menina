@@ -17,7 +17,7 @@
       );
 
       const base64 = parts.join('').replace(/\s+/g, '');
-      const spriteUrl = `url("data:image/webp;base64,${base64}")`;
+      const spriteUrl = `url(\"data:image/webp;base64,${base64}\")`;
       document.querySelectorAll('.asset-image').forEach((element) => {
         element.style.setProperty('background-image', spriteUrl, 'important');
         element.style.setProperty('background-repeat', 'no-repeat', 'important');
@@ -32,6 +32,31 @@
   loadBrandMedia();
 
   const officialInstagram = 'https://www.instagram.com/scentby_menina/';
+
+  // Give visitors a direct path from the main landing page to the Linktree-style
+  // hub containing the brand's website, WhatsApp, Instagram and TikTok links.
+  const addLinksPageEntryPoints = () => {
+    const linksHref = '/links.html';
+    const heroActions = document.querySelector('.hero-actions');
+    if (heroActions && !heroActions.querySelector('[data-links-page]')) {
+      const link = document.createElement('a');
+      link.className = 'btn btn-ghost';
+      link.href = linksHref;
+      link.dataset.linksPage = 'true';
+      link.textContent = 'Shop, Follow & Connect ↗';
+      heroActions.appendChild(link);
+    }
+
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    if (mobileMenu && !mobileMenu.querySelector('[data-links-page]')) {
+      const link = document.createElement('a');
+      link.href = linksHref;
+      link.dataset.linksPage = 'true';
+      link.textContent = 'Shop, Follow & Connect ↗';
+      mobileMenu.appendChild(link);
+    }
+  };
+  addLinksPageEntryPoints();
 
   // The former Bumpa storefront is inactive. Route every old storefront link
   // to the official Instagram profile so visitors never hit a dead destination.
