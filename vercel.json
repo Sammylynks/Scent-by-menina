@@ -3,6 +3,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/", "destination": "/app-v2.html" },
+    { "source": "/links", "destination": "/links.html" },
     { "source": "/sprite.webp", "destination": "/sprite-fixed.svg" }
   ]
 }
